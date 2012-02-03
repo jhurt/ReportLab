@@ -617,12 +617,13 @@ def registerFont(font):
     "Registers a font, including setting up info for accelerated stringWidth"
     #assert isinstance(font, Font), 'Not a Font: %s' % font
     fontName = font.fontName
-    _fonts[fontName] = font
-    if font._multiByte:
-        # CID fonts don't need to have typeface registered.
-        #need to set mappings so it can go in a paragraph even if within
-        # bold tags
-        registerFontFamily(font.fontName)
+    if not fontName in _fonts.keys():
+        _fonts[fontName] = font
+        if font._multiByte:
+            # CID fonts don't need to have typeface registered.
+            #need to set mappings so it can go in a paragraph even if within
+            # bold tags
+            registerFontFamily(font.fontName)
 
 def getTypeFace(faceName):
     """Lazily construct known typefaces if not found"""
