@@ -2084,6 +2084,8 @@ class PDFImageXObject:
             pass # use the canned one.
         elif hasattr(source,'jpeg_fh'):
             self.loadImageFromSRC(source)   #it is already a PIL Image
+        elif source.format=='JPEG':
+            self.loadImageFromA85(source)
         else:
             # it is a filename
             import os
