@@ -2084,18 +2084,18 @@ class PDFImageXObject:
             pass # use the canned one.
         elif hasattr(source,'jpeg_fh'):
             self.loadImageFromSRC(source)   #it is already a PIL Image
-        elif source.format=='JPEG':
-            self.loadImageFromA85(source)
         else:
-            # it is a filename
-            import os
-            ext = string.lower(os.path.splitext(source)[1])
-            src = open_for_read(source)
-            if not(ext in ('.jpg', '.jpeg') and self.loadImageFromJPEG(src)):
-                if rl_config.useA85:
-                    self.loadImageFromA85(src)
-                else:
-                    self.loadImageFromRaw(src)
+            self.loadImageFromA85(source)
+#        else:
+#            # it is a filename
+#            import os
+#            ext = string.lower(os.path.splitext(source)[1])
+#            src = open_for_read(source)
+#            if not(ext in ('.jpg', '.jpeg') and self.loadImageFromJPEG(src)):
+#                if rl_config.useA85:
+#                    self.loadImageFromA85(src)
+#                else:
+#                    self.loadImageFromRaw(src)
 
     def loadImageFromA85(self,source):
         IMG=[]
